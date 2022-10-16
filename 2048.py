@@ -60,7 +60,7 @@ def move_up(board,size):
 
   
 def move_cont(board, size, dir):
-    if dir.lower == "w":
+    if dir.lower() == "w":
         move_up(board, size)
     
     

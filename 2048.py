@@ -58,11 +58,46 @@ def move_up(board,size):
                 board[i-1][j] = board[i][j]
                 board[i][j] = ""
 
-  
+def move_down(board, size):
+    for i in reversed(range(0, size-1)):
+        for j in range(0, size):
+            if board[i][j] != "" and board[i][j] == board[i+1][j]:
+                board[i+1][j] = board[i+1][j] + board[i][j]
+                board[i][j] = ""
+            elif board[i][j] != "" and board[i+1][j] == "":
+                board[i+1][j] = board[i][j]
+                board[i][j] = ""
+
+def move_left(board, size):
+    for i in range(0, size):
+        for j in range(1, size):
+            if board[i][j] != "" and board[i][j] == board[i][j-1]:
+                board[i][j-1] = board[i][j-1] + board[i][j]
+                board[i][j] = ""
+            elif board[i][j] != "" and board[i][j-1] == "":
+                board[i][j-1] = board[i][j]
+                board[i][j] = ""
+
+def move_right(board, size):
+    for i in range(0, size):
+        for j in reversed(range(0, size-1)):
+            if board[i][j] != "" and board[i][j] == board[i][j+1]:
+                board[i][j+1] = board[i][j+1] + board[i][j]
+                board[i][j] = ""
+            elif board[i][j] != "" and board[i][j+1] == "":
+                board[i][j+1] = board[i][j]
+                board[i][j] = ""
+                
+
 def move_cont(board, size, dir):
     if dir.lower() == "w":
         move_up(board, size)
-    
+    if dir.lower() == "s":
+        move_down(board, size)
+    if dir.lower() == "a":
+        move_left(board, size)
+    if dir.lower() == "d":
+        move_right(board, size)
     
     
             

@@ -111,14 +111,18 @@ def user_input():
 #-------------------------------------------------File Management
 
 def read_file():
-    with open("2048_save.txt") as f:
-        board = []  #[[int(elem) for elem in row.split(',')] for row in f]
-        
-        for row in f:
-            board_row = []
-            for elem in row.split(','):
-                board_row.append(elem)
-            board.append(board_row)
+    with open("2048_save.txt", "r") as f:
+        board = [[int(elem) if elem.isdigit() else "" for elem in row.split(',')] for row in f]
+
+#        board = []
+#        for row in f:
+#            board_row = []
+#            for elem in row.split(','):
+#                if elem.isdigit():
+#                    board_row.append(int(elem))
+#                else:
+#                    board_row.append("")
+#            board.append(board_row)
 
     return board
 

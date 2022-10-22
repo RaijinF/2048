@@ -1,4 +1,6 @@
 import random
+import os
+import time
 
 #-------------------------------board
 
@@ -10,6 +12,8 @@ def init_board(board, size):
         board.append(row)
         
 def print_board(board):
+    time.sleep(0.2)
+    os.system('cls')
     for row in board:
         for elem in row:
             print(f"[{elem : ^4}]", end="")
@@ -31,7 +35,7 @@ def gen_num():
     random_index = random.randint(0, 9)
     return next_num[random_index]     
 
-def next_num(size, board):
+def next_num(board, size):
     num = gen_num()
     x, y = gen_cor(size)
     while not is_cor_free(board, x, y): # while not "true" jump 38, while not "false" jump 39
@@ -99,7 +103,26 @@ def move_cont(board, size, dir):
     if dir.lower() == "d":
         move_right(board, size)
     
-    
+
+def user_input():
+    return input()
+
+
+def runtime(board, size):
+    user_com = None
+    play = True
+
+    while play:
+        user_com = user_input()   
+        if user_com.lower() == "q":
+            play = False
+        else:
+            for i in range(4):
+                move_cont(board, size, user_com)
+                print_board(board)
+            next_num(board, size)
+            print_board(board)
+
             
 def main():
     size = 4
@@ -107,9 +130,7 @@ def main():
     init_board(board, size)
     init_num(board, size)
     print_board(board)
-    move_cont(board, size, input())
-    
-    print_board(board)
+    runtime(board, size)
     
 if __name__ == "__main__":
     main()

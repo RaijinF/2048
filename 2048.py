@@ -108,6 +108,21 @@ def user_input():
     return input()
 
 
+#-------------------------------------------------File Management
+
+def read_file():
+    with open("2048_save.txt") as f:
+        board = []  #[[int(elem) for elem in row.split(',')] for row in f]
+        
+        for row in f:
+            board_row = []
+            for elem in row.split(','):
+                board_row.append(elem)
+            board.append(board_row)
+
+    return board
+
+
 def runtime(board, size):
     user_com = None
     play = True
@@ -126,7 +141,7 @@ def runtime(board, size):
             
 def main():
     size = 4
-    board = []
+    board = read_file()
     init_board(board, size)
     init_num(board, size)
     print_board(board)
